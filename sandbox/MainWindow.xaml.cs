@@ -39,23 +39,10 @@ namespace sandbox
                 Item item_ = new Item("Pussydestroyer",1,statboostage);
                 Itemy.Add(item_);
             }
-            string serializationFile = @"C:\Users\Tom\Desktop\Škola\VS\sandbox\itemy.bin";
+            string json = JsonConvert.SerializeObject(Itemy.ToArray());
 
-            //serialize
-            using (Stream stream = File.Open(serializationFile, FileMode.Create))
-            {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                bformatter.Serialize(stream, Itemy);
-            }
-
-            //deserialize
-            using (Stream stream = File.Open(serializationFile, FileMode.Open))
-            {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                List<Item>  Itemy_ = (List<Item>)bformatter.Deserialize(stream);
-            }
+            //write string to file
+            System.IO.File.WriteAllText(@"C:\Users\Tom\Desktop\Škola\VS\sandbox\path.txt", json);
         }
     }
 }
